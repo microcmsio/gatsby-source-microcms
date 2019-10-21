@@ -31,6 +31,9 @@ statusCode: ${statusCode}
 message: ${body.message}`);
   }
 
+  // type option. default is endpoint value.
+  const type = pluginConfig.get('type') || pluginConfig.get('endpoint');
+
   // list content
   if (
     isListContent({
@@ -43,7 +46,7 @@ message: ${body.message}`);
         createNode,
         createNodeId,
         content: content,
-        type: pluginConfig.get('type'),
+        type: type,
       });
     });
   }
@@ -55,7 +58,7 @@ message: ${body.message}`);
       createNode,
       createNodeId,
       content: body,
-      type: pluginConfig.get('type'),
+      type: type,
     });
   }
 };

@@ -13,7 +13,6 @@ module.exports = {
         apiKey: process.env.MICROCMS_API_KEY,
         serviceId: process.env.MICROCMS_SERVICE_ID,
         endpoint: 'posts',
-        type: 'post',
       },
     },
     {
@@ -21,7 +20,7 @@ module.exports = {
       options: {
         apiKey: process.env.MICROCMS_API_KEY,
         serviceId: process.env.MICROCMS_SERVICE_ID,
-        endpoint: 'gatsby-object',
+        endpoint: 'object-content',
         format: 'object',
         type: 'single',
       },

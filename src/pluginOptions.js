@@ -24,9 +24,7 @@ const optionsSchema = Joi.object().keys({
   endpoint: Joi.string()
     .required()
     .empty(),
-  type: Joi.string()
-    .required()
-    .empty(),
+  type: Joi.string(),
   format: Joi.string().pattern(/^(list|object)$/),
   version: Joi.string(),
   plugins: Joi.array(),

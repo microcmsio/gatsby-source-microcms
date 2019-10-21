@@ -1,0 +1,33 @@
+{
+  "name": "gatsby-source-microcms",
+  "version": "0.0.1",
+  "description": "",
+  "main": "gatsby-node.js",
+  "license": "MIT",
+  "author": "shooontan",
+  "scripts": {
+    "prebuild": "rm -rf build/*",
+    "build": "tsc",
+    "watch": "tsc -w",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "peerDependencies": {
+    "gatsby": "^2.0.33"
+  },
+  "devDependencies": {
+    "@types/request": "^2.48.3",
+    "eslint": "^6.5.1",
+    "eslint-config-prettier": "^6.4.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-react": "^7.16.0",
+    "gatsby": "^2.16.5",
+    "prettier": "^1.18.2",
+    "typescript": "^3.6.4"
+  },
+  "dependencies": {
+    "@hapi/joi": "^16.1.7",
+    "camelcase": "^5.3.1",
+    "request": "^2.88.0"
+  }
+}

@@ -2,6 +2,7 @@
 
 [![npm version](https://img.shields.io/npm/v/gatsby-source-microcms.svg)](https://www.npmjs.com/package/gatsby-source-microcms)
 [![install size](https://packagephobia.now.sh/badge?p=gatsby-source-microcms)](https://packagephobia.now.sh/result?p=gatsby-source-microcms)
+[![Actions Status](https://github.com/shooontan/gatsby-source-microcms/workflows/CI/badge.svg)](https://github.com/shooontan/gatsby-source-microcms/actions)
 
 Source plugin for Gatsby from [microCMS](https://microcms.io/).
 

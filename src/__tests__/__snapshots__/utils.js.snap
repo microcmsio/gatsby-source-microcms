@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createContentNode content body 1`] = `
+Array [
+  Array [
+    Object {
+      "body": "content",
+      "children": Array [],
+      "id": "nodeId",
+      "internal": Object {
+        "content": "{\\"id\\":\\"vwxyz\\",\\"body\\":\\"content\\"}",
+        "contentDigest": "dc80de2bd37db677dea84c9626b2aef0",
+        "type": "MicrocmsNews",
+      },
+      "newsId": "vwxyz",
+      "parent": null,
+    },
+  ],
+]
+`;
+
+exports[`createContentNode content id 1`] = `
+Array [
+  Array [
+    Object {
+      "children": Array [],
+      "id": "nodeId",
+      "internal": Object {
+        "content": "{\\"id\\":\\"abcde\\"}",
+        "contentDigest": "d816d8eec404705cf80f72fe03d6834f",
+        "type": "MicrocmsPost",
+      },
+      "parent": null,
+      "postId": "abcde",
+    },
+  ],
+]
+`;

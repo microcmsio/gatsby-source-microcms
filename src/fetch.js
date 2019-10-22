@@ -1,13 +1,14 @@
-const { promisify } = require('util');
-const request = require('request');
+const got = require('got');
 
 module.exports = function fetchData(url, apiKey) {
-  return promisify(request.get)(url, {
-    headers: {
-      'X-API-KEY': apiKey,
-    },
-  }).then(response => ({
-    ...response,
-    body: JSON.parse(response.body),
-  }));
+  return got
+    .get(url, {
+      headers: {
+        'X-API-KEY': apiKey,
+      },
+      json: true,
+    })
+    .catch(error => {
+      return error.response;
+    });
 };

@@ -28,6 +28,7 @@ const optionsSchema = Joi.object().keys({
   type: Joi.string(),
   format: Joi.string().pattern(/^(list|object)$/),
   fields: Joi.array().items(Joi.string()),
+  limit: Joi.number().integer(),
   version: Joi.string(),
   plugins: Joi.array(),
 });

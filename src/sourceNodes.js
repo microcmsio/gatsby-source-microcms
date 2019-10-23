@@ -24,6 +24,7 @@ const sourceNodes = async (
     apiKey: pluginConfig.get('apiKey'),
     query: {
       fields: pluginConfig.get('fields').join(','),
+      limit: pluginConfig.get('limit'),
     },
   });
 

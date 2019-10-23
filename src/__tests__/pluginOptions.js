@@ -128,4 +128,36 @@ describe('validateOptions', () => {
     validateOptions({ reporter }, { ...options, fields: ['id', 123] });
     expect(reporter.panic.mock.calls.length).toBe(2);
   });
+
+  test('limit option should be success.', () => {
+    const options = {
+      apiKey: 'key',
+      serviceId: 'id',
+      endpoint: 'endpoint',
+      limit: 1,
+    };
+    validateOptions({ reporter }, options);
+    expect(reporter.panic).not.toBeCalled();
+  });
+
+  test('invalide limit option should be error.', () => {
+    const options = {
+      apiKey: 'key',
+      serviceId: 'id',
+      endpoint: 'endpoint',
+    };
+
+    // string
+    validateOptions({ reporter }, { ...options, limit: 'abc' });
+    expect(reporter.panic.mock.calls.length).toBe(1);
+    // float
+    validateOptions({ reporter }, { ...options, limit: 1.3 });
+    expect(reporter.panic.mock.calls.length).toBe(2);
+    // object
+    validateOptions({ reporter }, { ...options, limit: {} });
+    expect(reporter.panic.mock.calls.length).toBe(3);
+    // array
+    validateOptions({ reporter }, { ...options, limit: [2] });
+    expect(reporter.panic.mock.calls.length).toBe(4);
+  });
 });

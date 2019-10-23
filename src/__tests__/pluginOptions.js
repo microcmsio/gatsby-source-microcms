@@ -104,4 +104,28 @@ describe('validateOptions', () => {
     validateOptions({ reporter }, options);
     expect(reporter.panic.mock.calls.length).toBe(1);
   });
+
+  test('fields option should be success.', () => {
+    const options = {
+      apiKey: 'key',
+      serviceId: 'id',
+      endpoint: 'endpoint',
+      fields: ['id', 'title'],
+    };
+    validateOptions({ reporter }, options);
+    expect(reporter.panic).not.toBeCalled();
+  });
+
+  test('invalide fields option should be error.', () => {
+    const options = {
+      apiKey: 'key',
+      serviceId: 'id',
+      endpoint: 'endpoint',
+    };
+    validateOptions({ reporter }, { ...options, fields: {} });
+    expect(reporter.panic.mock.calls.length).toBe(1);
+
+    validateOptions({ reporter }, { ...options, fields: ['id', 123] });
+    expect(reporter.panic.mock.calls.length).toBe(2);
+  });
 });

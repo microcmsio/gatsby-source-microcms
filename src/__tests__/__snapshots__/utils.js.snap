@@ -19,6 +19,24 @@ Array [
 ]
 `;
 
+exports[`createContentNode content does not have id 1`] = `
+Array [
+  Array [
+    Object {
+      "body": "content",
+      "children": Array [],
+      "id": "nodeId",
+      "internal": Object {
+        "content": "{\\"body\\":\\"content\\"}",
+        "contentDigest": "067d01e67619fda073f1510f2d8811ce",
+        "type": "MicrocmsBody",
+      },
+      "parent": null,
+    },
+  ],
+]
+`;
+
 exports[`createContentNode content id 1`] = `
 Array [
   Array [

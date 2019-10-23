@@ -34,7 +34,7 @@ describe('content type', () => {
         },
       })
     ).toBe(true);
-    expect(isObjectContent({ format: 'object', content: {} })).toBe(false);
+    expect(isObjectContent({ format: 'object', content: [] })).toBe(false);
     expect(
       isObjectContent({
         format: 'invalid',
@@ -56,6 +56,7 @@ describe('createContentNode', () => {
       type: 'post',
     });
     expect(createNode.mock.calls).toMatchSnapshot();
+    expect(createNode.mock.calls[0][0]).not.toHaveProperty('abcdeId');
   });
 
   test('content body', () => {
@@ -67,5 +68,18 @@ describe('createContentNode', () => {
       type: 'news',
     });
     expect(createNode.mock.calls).toMatchSnapshot();
+    expect(createNode.mock.calls[0][0]).not.toHaveProperty('vwxyzId');
+  });
+
+  test('content does not have id', () => {
+    createNodeId.mockReturnValue('nodeId');
+    createContentNode({
+      createNode,
+      createNodeId,
+      content: { body: 'content' },
+      type: 'body',
+    });
+    expect(createNode.mock.calls).toMatchSnapshot();
+    expect(createNode.mock.calls[0][0]).not.toHaveProperty('bodyId');
   });
 });

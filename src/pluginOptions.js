@@ -1,8 +1,9 @@
-const Joi = require(`@hapi/joi`);
+const Joi = require('@hapi/joi');
 
 const defaultOptions = {
   format: 'list',
   version: 'v1',
+  fields: [],
 };
 
 const createPluginConfig = pluginOptions => {
@@ -26,6 +27,7 @@ const optionsSchema = Joi.object().keys({
     .empty(),
   type: Joi.string(),
   format: Joi.string().pattern(/^(list|object)$/),
+  fields: Joi.array().items(Joi.string()),
   version: Joi.string(),
   plugins: Joi.array(),
 });

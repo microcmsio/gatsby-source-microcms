@@ -13,23 +13,21 @@ const isObjectContent = ({ format, content }) => {
   return (
     format === 'object' &&
     typeof content === 'object' &&
-    typeof content.id === 'string'
+    !Array.isArray(content) &&
+    !!Object.keys(content).length
   );
 };
 
 const createContentNode = ({ createNode, createNodeId, content, type }) => {
-  const nodeId = createNodeId(content.id);
   const nodeContent = JSON.stringify(content);
+  const nodeId = createNodeId(content.id || nodeContent);
   const nodeContentDigest = crypto
     .createHash('md5')
     .update(nodeContent)
     .digest('hex');
 
-  const contentIdName = camelCase([type, 'id']);
-
   const node = {
     ...content,
-    [contentIdName]: content.id, // content id
     id: nodeId,
     parent: null,
     children: [],
@@ -39,6 +37,15 @@ const createContentNode = ({ createNode, createNodeId, content, type }) => {
       contentDigest: nodeContentDigest,
     },
   };
+
+  /**
+   * To avoid conflicting named id,
+   * rename to ${type}Id if content has id property.
+   */
+  if (content.id) {
+    const contentIdName = camelCase([type, 'id']);
+    node[contentIdName] = content.id;
+  }
 
   createNode(node);
 };

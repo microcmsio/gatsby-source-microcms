@@ -20,10 +20,12 @@ const sourceNodes = async (
     'endpoint'
   )}`;
 
-  const { statusCode, body } = await fetchData(
-    apiUrl,
-    pluginConfig.get('apiKey')
-  );
+  const { statusCode, body } = await fetchData(apiUrl, {
+    apiKey: pluginConfig.get('apiKey'),
+    query: {
+      fields: pluginConfig.get('fields').join(','),
+    },
+  });
 
   if (statusCode !== 200) {
     reporter.panic(`microCMS API ERROR:

@@ -13,6 +13,17 @@ module.exports = {
         apiKey: process.env.MICROCMS_API_KEY,
         serviceId: process.env.MICROCMS_SERVICE_ID,
         endpoint: 'posts',
+        query: {
+          limit: 100,
+          fields: [
+            'id',
+            'postsId',
+            'title',
+            'body',
+            'createdAt',
+            'updatedAt',
+          ].join(','),
+        },
       },
     },
     {

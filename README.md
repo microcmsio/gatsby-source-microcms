@@ -86,18 +86,24 @@ module.exports = {
       options: {
         /**
          * The authentication key required for API requests. (Required)
+         *
+         * Type: string.
          **/
         apiKey: '11111111-2222-3333-4444-555555555555',
 
         /**
          * Subdomain information. (Required)
          * xxxx.microcms.io
+         *
+         * Type: string.
          **/
         serviceId: 'xxxx',
 
         /**
          * API endpoint name. (Required)
          * https://xxxx.microcms.io/api/v1/posts
+         *
+         * Type: string.
          **/
         endpoint: 'posts',
 
@@ -106,16 +112,33 @@ module.exports = {
          * This is used in GraphQL queries.
          * If type = 'post', the GraphQL types are named 'microcmsPost' and 'allMicrocmsPost'.
          *
-         * Default is endpoint value.
+         * Type: string.
+         * Default: endpoint value.
          **/
         type: 'post',
 
         /**
          * microCMS's content type('list' or 'object'). (Optional)
          *
-         * Default is 'list'.
+         * Type: string.
+         * Default: 'list'.
          **/
-        format: 'object'
+        format: 'object',
+
+        /**
+         * API request query options. (Optional)
+         *
+         * Type:
+         *   limit: number.
+         *   offset: number.
+         *   fields: string.
+         * Default: {}.
+         **/
+        query: {
+          limit: 100,
+          offset: 40,
+          fields: ['id', 'title', 'body'].join(',')
+        }
       },
     },
   ],

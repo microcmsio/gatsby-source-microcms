@@ -22,11 +22,7 @@ const sourceNodes = async (
 
   const { statusCode, body } = await fetchData(apiUrl, {
     apiKey: pluginConfig.get('apiKey'),
-    query: {
-      fields: pluginConfig.get('fields').join(','),
-      limit: pluginConfig.get('limit'),
-      offset: pluginConfig.get('offset'),
-    },
+    query: pluginConfig.get('query'),
   });
 
   if (statusCode !== 200) {

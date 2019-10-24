@@ -4,6 +4,7 @@ const defaultOptions = {
   format: 'list',
   version: 'v1',
   fields: [],
+  query: {},
 };
 
 const createPluginConfig = pluginOptions => {
@@ -27,9 +28,11 @@ const optionsSchema = Joi.object().keys({
     .empty(),
   type: Joi.string(),
   format: Joi.string().pattern(/^(list|object)$/),
-  fields: Joi.array().items(Joi.string()),
-  limit: Joi.number().integer(),
-  offset: Joi.number().integer(),
+  query: Joi.object({
+    fields: Joi.string(),
+    limit: Joi.number().integer(),
+    offset: Joi.number().integer(),
+  }),
   version: Joi.string(),
   plugins: Joi.array(),
 });

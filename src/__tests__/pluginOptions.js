@@ -110,7 +110,9 @@ describe('validateOptions', () => {
       apiKey: 'key',
       serviceId: 'id',
       endpoint: 'endpoint',
-      fields: ['id', 'title'],
+      query: {
+        fields: ['id', 'title'].join(','),
+      },
     };
     validateOptions({ reporter }, options);
     expect(reporter.panic).not.toBeCalled();
@@ -122,10 +124,13 @@ describe('validateOptions', () => {
       serviceId: 'id',
       endpoint: 'endpoint',
     };
-    validateOptions({ reporter }, { ...options, fields: {} });
+    validateOptions({ reporter }, { ...options, query: { fields: {} } });
     expect(reporter.panic.mock.calls.length).toBe(1);
 
-    validateOptions({ reporter }, { ...options, fields: ['id', 123] });
+    validateOptions(
+      { reporter },
+      { ...options, query: { fields: ['id', 123] } }
+    );
     expect(reporter.panic.mock.calls.length).toBe(2);
   });
 
@@ -134,7 +139,9 @@ describe('validateOptions', () => {
       apiKey: 'key',
       serviceId: 'id',
       endpoint: 'endpoint',
-      limit: 1,
+      query: {
+        limit: 1,
+      },
     };
     validateOptions({ reporter }, options);
     expect(reporter.panic).not.toBeCalled();
@@ -148,16 +155,16 @@ describe('validateOptions', () => {
     };
 
     // string
-    validateOptions({ reporter }, { ...options, limit: 'abc' });
+    validateOptions({ reporter }, { ...options, query: { limit: 'abc' } });
     expect(reporter.panic.mock.calls.length).toBe(1);
     // float
-    validateOptions({ reporter }, { ...options, limit: 1.3 });
+    validateOptions({ reporter }, { ...options, query: { limit: 1.3 } });
     expect(reporter.panic.mock.calls.length).toBe(2);
     // object
-    validateOptions({ reporter }, { ...options, limit: {} });
+    validateOptions({ reporter }, { ...options, query: { limit: {} } });
     expect(reporter.panic.mock.calls.length).toBe(3);
     // array
-    validateOptions({ reporter }, { ...options, limit: [2] });
+    validateOptions({ reporter }, { ...options, query: { limit: [2] } });
     expect(reporter.panic.mock.calls.length).toBe(4);
   });
 
@@ -166,7 +173,9 @@ describe('validateOptions', () => {
       apiKey: 'key',
       serviceId: 'id',
       endpoint: 'endpoint',
-      limit: 1,
+      query: {
+        offset: 1,
+      },
     };
     validateOptions({ reporter }, options);
     expect(reporter.panic).not.toBeCalled();
@@ -180,13 +189,13 @@ describe('validateOptions', () => {
     };
 
     // string
-    validateOptions({ reporter }, { ...options, offset: 'abc' });
+    validateOptions({ reporter }, { ...options, query: { offset: 'abc' } });
     expect(reporter.panic.mock.calls.length).toBe(1);
     // float
-    validateOptions({ reporter }, { ...options, offset: 1.3 });
+    validateOptions({ reporter }, { ...options, query: { offset: 1.3 } });
     expect(reporter.panic.mock.calls.length).toBe(2);
     // object
-    validateOptions({ reporter }, { ...options, offset: {} });
+    validateOptions({ reporter }, { ...options, query: { offset: {} } });
     expect(reporter.panic.mock.calls.length).toBe(3);
     // array
     validateOptions({ reporter }, { ...options, offset: [2] });

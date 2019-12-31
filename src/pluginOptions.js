@@ -29,6 +29,7 @@ const optionsSchema = Joi.object().keys({
   type: Joi.string(),
   format: Joi.string().pattern(/^(list|object)$/),
   query: Joi.object({
+    draftKey: Joi.string(),
     fields: Joi.string(),
     limit: Joi.number().integer(),
     offset: Joi.number().integer(),

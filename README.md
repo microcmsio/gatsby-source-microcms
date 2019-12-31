@@ -129,6 +129,7 @@ module.exports = {
          * API request query options. (Optional)
          *
          * Type:
+         *   draftKey: string.
          *   limit: number.
          *   offset: number.
          *   fields: string.
@@ -137,6 +138,7 @@ module.exports = {
          * Default: {}.
          **/
         query: {
+          draftKey: 'DRAFT_KEY',
           limit: 100,
           offset: 40,
           fields: ['id', 'title', 'body'].join(','),

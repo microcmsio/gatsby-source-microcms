@@ -105,6 +105,40 @@ describe('validateOptions', () => {
     expect(reporter.panic.mock.calls.length).toBe(1);
   });
 
+  test('draftKey option should be success.', () => {
+    const options = {
+      apiKey: 'key',
+      serviceId: 'id',
+      endpoint: 'endpoint',
+      query: {
+        draftKey: 'DRAFT_KEY',
+      },
+    };
+    validateOptions({ reporter }, options);
+    expect(reporter.panic).not.toBeCalled();
+  });
+
+  test('invalide draftKey option should be error.', () => {
+    const options = {
+      apiKey: 'key',
+      serviceId: 'id',
+      endpoint: 'endpoint',
+    };
+
+    // empty string
+    validateOptions({ reporter }, { ...options, query: { draftKey: '' } });
+    expect(reporter.panic.mock.calls.length).toBe(1);
+    // float
+    validateOptions({ reporter }, { ...options, query: { draftKey: 1.3 } });
+    expect(reporter.panic.mock.calls.length).toBe(2);
+    // object
+    validateOptions({ reporter }, { ...options, query: { draftKey: {} } });
+    expect(reporter.panic.mock.calls.length).toBe(3);
+    // array
+    validateOptions({ reporter }, { ...options, draftKey: [2] });
+    expect(reporter.panic.mock.calls.length).toBe(4);
+  });
+
   test('fields option should be success.', () => {
     const options = {
       apiKey: 'key',

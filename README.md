@@ -133,13 +133,15 @@ module.exports = {
          *   offset: number.
          *   fields: string.
          *   filters: string.
+         *   depth: number.
          * Default: {}.
          **/
         query: {
           limit: 100,
           offset: 40,
           fields: ['id', 'title', 'body'].join(','),
-          filters: 'tag[exists]'
+          filters: 'tag[exists]',
+          depth: 2
         }
       },
     },

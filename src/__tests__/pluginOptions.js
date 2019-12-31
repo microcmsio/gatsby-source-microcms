@@ -235,4 +235,38 @@ describe('validateOptions', () => {
     validateOptions({ reporter }, { ...options, filters: ['a', 2] });
     expect(reporter.panic.mock.calls.length).toBe(4);
   });
+
+  test('depth option should be success.', () => {
+    const options = {
+      apiKey: 'key',
+      serviceId: 'id',
+      endpoint: 'endpoint',
+      query: {
+        depth: 3,
+      },
+    };
+    validateOptions({ reporter }, options);
+    expect(reporter.panic).not.toBeCalled();
+  });
+
+  test('invalid depth option should be error.', () => {
+    const options = {
+      apiKey: 'key',
+      serviceId: 'id',
+      endpoint: 'endpoint',
+    };
+
+    // string
+    validateOptions({ reporter }, { ...options, query: { depth: 'abc' } });
+    expect(reporter.panic.mock.calls.length).toBe(1);
+    // float
+    validateOptions({ reporter }, { ...options, query: { depth: 1.3 } });
+    expect(reporter.panic.mock.calls.length).toBe(2);
+    // over max int
+    validateOptions({ reporter }, { ...options, query: { depth: 4 } });
+    expect(reporter.panic.mock.calls.length).toBe(3);
+    // array
+    validateOptions({ reporter }, { ...options, offset: ['11', 22] });
+    expect(reporter.panic.mock.calls.length).toBe(4);
+  });
 });

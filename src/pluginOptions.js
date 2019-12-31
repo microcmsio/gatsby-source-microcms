@@ -33,6 +33,9 @@ const optionsSchema = Joi.object().keys({
     limit: Joi.number().integer(),
     offset: Joi.number().integer(),
     filters: Joi.string(),
+    depth: Joi.number()
+      .integer()
+      .max(3),
   }),
   version: Joi.string(),
   plugins: Joi.array(),

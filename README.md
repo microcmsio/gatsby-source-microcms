@@ -132,15 +132,113 @@ module.exports = {
          *   limit: number.
          *   offset: number.
          *   fields: string.
+         *   filters: string.
          * Default: {}.
          **/
         query: {
           limit: 100,
           offset: 40,
-          fields: ['id', 'title', 'body'].join(',')
+          fields: ['id', 'title', 'body'].join(','),
+          filters: 'tag[exists]'
         }
       },
     },
   ],
 };
+```
+
+#### filters
+
+This plugin provides [filters query](https://microcms.io/blog/filters-parameter/) building helper.
+
+```js
+// gatsby-config.js
+const { and, contains, exists } = require('gatsby-source-microcms/src/query-builder');
+
+module.exports = {
+  plugins: [
+    {
+      resolve: 'gatsby-source-microcms',
+      options: {
+        query: {
+          filters: and(contains('title', 'sale'), exists('tag')),
+          //=> `title[contains]sale[and]tag[exists]`
+        }
+      },
+    },
+  ],
+};
+
+```
+
+Helper list:
+
+- `equals` (alias: `eq`)
+
+```js
+equals('gender', 'women')
+//=> gender[equals]women
+```
+
+- `notEquals` (alias: `neq`)
+
+```js
+notEquals('gender', 'women')
+//=> gender[not_equals]women
+```
+
+- `lessThan` (alias: `lg`)
+
+```js
+lessThan('createdAt', '2019-11')
+//=> createdAt[less_than]2019-11
+```
+
+- `greaterThan` (alias: `gt`)
+
+```js
+greaterThan('createdAt', '2019-11')
+//=> createdAt[greater_than]2019-11
+```
+
+- `contains`
+
+```js
+contains('title', 'sale')
+//=> title[contains]sale
+```
+
+- `exists`
+
+```js
+exists('nextLink')
+//=> nextLink[exists]
+```
+
+- `notExists`
+
+```js
+notExists('nextLink')
+//=> nextLink[not_exists]
+```
+
+- `beginsWith`
+
+```js
+beginsWith('publishedAt', '2019-11')
+//=> publishedAt[begins_with]2019-11
+```
+
+- `and`
+
+```js
+and('filter1', 'filter2', ..., 'filter10')
+//=> filter1[and]filter2[and]...[and]filter10
+```
+
+- `or`
+
+```js
+or('filter1', 'filter2', ..., 'filter10')
+//=> filter1[or]filter2[or]...[or]filter10
 ```

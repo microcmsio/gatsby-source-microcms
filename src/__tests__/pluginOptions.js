@@ -201,4 +201,38 @@ describe('validateOptions', () => {
     validateOptions({ reporter }, { ...options, offset: [2] });
     expect(reporter.panic.mock.calls.length).toBe(4);
   });
+
+  test('filters option should be success.', () => {
+    const options = {
+      apiKey: 'key',
+      serviceId: 'id',
+      endpoint: 'endpoint',
+      query: {
+        filters: 'tag[exists]',
+      },
+    };
+    validateOptions({ reporter }, options);
+    expect(reporter.panic).not.toBeCalled();
+  });
+
+  test('invalid filters option should be success.', () => {
+    const options = {
+      apiKey: 'key',
+      serviceId: 'id',
+      endpoint: 'endpoint',
+    };
+
+    // empty string
+    validateOptions({ reporter }, { ...options, query: { filters: '' } });
+    expect(reporter.panic.mock.calls.length).toBe(1);
+    // number
+    validateOptions({ reporter }, { ...options, query: { filters: 100 } });
+    expect(reporter.panic.mock.calls.length).toBe(2);
+    // object
+    validateOptions({ reporter }, { ...options, query: { filters: {} } });
+    expect(reporter.panic.mock.calls.length).toBe(3);
+    // array
+    validateOptions({ reporter }, { ...options, filters: ['a', 2] });
+    expect(reporter.panic.mock.calls.length).toBe(4);
+  });
 });

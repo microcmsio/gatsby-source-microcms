@@ -1,5 +1,7 @@
 require('dotenv').config();
 
+const { and, equals, exists, notExists } = require('../src/query-builder');
+
 module.exports = {
   siteMetadata: {
     title: 'Blog',
@@ -23,6 +25,7 @@ module.exports = {
             'createdAt',
             'updatedAt',
           ].join(','),
+          filters: and(exists('title'), exists('tag')),
         },
       },
     },

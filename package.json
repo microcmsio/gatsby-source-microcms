@@ -1,16 +1,19 @@
 {
   "name": "gatsby-source-microcms",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Source plugin for Gatsby from microCMS.",
   "main": "gatsby-node.js",
   "license": "MIT",
-  "author": "shooontan",
+  "contributors": [
+    "shibe97",
+    "shooontan"
+  ],
   "scripts": {
     "test": "jest"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/shooontan/gatsby-source-microcms.git"
+    "url": "https://github.com/wantainc/gatsby-source-microcms.git"
   },
   "devDependencies": {
     "eslint": "^6.5.1",

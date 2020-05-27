@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 // We prepared one service to make it easy for anyone to develop.
 const MICROCMS_API_KEY = 'dc59f358-4622-471f-8d1e-6c7a6f969558';
 const MICROCMS_SERVICE_ID = 'example';
@@ -14,8 +16,8 @@ module.exports = {
     {
       resolve: require.resolve('../gatsby-node'),
       options: {
-        apiKey: MICROCMS_API_KEY,
-        serviceId: MICROCMS_SERVICE_ID,
+        apiKey: process.env.MICROCMS_API_KEY || MICROCMS_API_KEY,
+        serviceId: process.env.MICROCMS_SERVICE_ID || MICROCMS_SERVICE_ID,
         endpoint: 'gatsbylist',
         query: {
           limit: 100,
@@ -34,8 +36,8 @@ module.exports = {
     {
       resolve: require.resolve('../gatsby-node'),
       options: {
-        apiKey: MICROCMS_API_KEY,
-        serviceId: MICROCMS_SERVICE_ID,
+        apiKey: process.env.MICROCMS_API_KEY || MICROCMS_API_KEY,
+        serviceId: process.env.MICROCMS_SERVICE_ID || MICROCMS_SERVICE_ID,
         endpoint: 'gatsbyobject',
         format: 'object',
       },

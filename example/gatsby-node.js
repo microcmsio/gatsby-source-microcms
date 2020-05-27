@@ -7,10 +7,10 @@ exports.createPages = async ({ graphql, actions }) => {
   const result = await graphql(
     `
       {
-        allMicrocmsPosts(sort: { fields: [createdAt], order: DESC }) {
+        allMicrocmsGatsbylist(sort: { fields: [createdAt], order: DESC }) {
           edges {
             node {
-              postsId
+              gatsbylistId
               createdAt
             }
           }
@@ -23,12 +23,12 @@ exports.createPages = async ({ graphql, actions }) => {
     throw result.errors;
   }
 
-  result.data.allMicrocmsPosts.edges.forEach((post, index) => {
+  result.data.allMicrocmsGatsbylist.edges.forEach((post, index) => {
     createPage({
-      path: post.node.postsId,
+      path: post.node.gatsbylistId,
       component: blogPost,
       context: {
-        slug: post.node.postsId,
+        slug: post.node.gatsbylistId,
       },
     });
   });

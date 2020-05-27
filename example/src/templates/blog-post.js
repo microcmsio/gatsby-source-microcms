@@ -2,14 +2,14 @@ import * as React from 'react';
 import { graphql } from 'gatsby';
 
 export default props => {
-  const { microcmsPosts } = props.data;
+  const { microcmsGatsbylist } = props.data;
   return (
     <div>
-      <p>{microcmsPosts.title}</p>
+      <p>{microcmsGatsbylist.title}</p>
       <p>
-        {microcmsPosts.createdAt} - {microcmsPosts.updatedAt}
+        {microcmsGatsbylist.createdAt} - {microcmsGatsbylist.updatedAt}
       </p>
-      <div dangerouslySetInnerHTML={{ __html: microcmsPosts.body }} />
+      <div dangerouslySetInnerHTML={{ __html: microcmsGatsbylist.body }} />
     </div>
   );
 };
@@ -21,8 +21,7 @@ export const pageQuery = graphql`
         title
       }
     }
-    microcmsPosts(postsId: { eq: $slug }) {
-      postsId
+    microcmsGatsbylist(gatsbylistId: { eq: $slug }) {
       title
       body
       createdAt(formatString: "YYYY.MM.DD")

@@ -1,16 +1,15 @@
 {
   "name": "gatsby-source-microcms-sample",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
-  "main": "index.js",
+  "main": "gatsby-config.js",
   "scripts": {
     "dev": "gatsby develop",
     "build": "gatsby build"
   },
   "dependencies": {
-    "dotenv": "^8.2.0",
-    "gatsby": "^2.16.5",
-    "react": "^16.10.2",
-    "react-dom": "^16.10.2"
+    "gatsby": "^2.22.10",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
   }
 }

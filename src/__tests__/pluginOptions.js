@@ -105,6 +105,32 @@ describe('validateOptions', () => {
     expect(reporter.panic.mock.calls.length).toBe(1);
   });
 
+  test('valid readAll option should be success.', () => {
+    const options = {
+      apiKey: 'key',
+      serviceId: 'id',
+      endpoint: 'endpoint',
+      format: 'list',
+      readAll: true,
+    };
+
+    validateOptions({ reporter }, options);
+    expect(reporter.panic.mock.calls.length).toBe(0);
+  });
+
+  test('invalid readAll option should be fail.', () => {
+    const options = {
+      apiKey: 'key',
+      serviceId: 'id',
+      endpoint: 'endpoint',
+      format: 'list',
+      readAll: 'true',
+    };
+
+    validateOptions({ reporter }, options);
+    expect(reporter.panic.mock.calls.length).toBe(0);
+  });
+
   test('draftKey option should be success.', () => {
     const options = {
       apiKey: 'key',

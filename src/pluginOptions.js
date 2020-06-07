@@ -3,6 +3,7 @@ const Joi = require('@hapi/joi');
 const defaultOptions = {
   format: 'list',
   version: 'v1',
+  readAll: false,
   fields: [],
   query: {},
 };
@@ -28,6 +29,7 @@ const optionsSchema = Joi.object().keys({
     .empty(),
   type: Joi.string(),
   format: Joi.string().pattern(/^(list|object)$/),
+  readAll: Joi.boolean(),
   query: Joi.object({
     draftKey: Joi.string(),
     fields: Joi.string(),

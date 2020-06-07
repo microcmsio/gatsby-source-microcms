@@ -125,6 +125,14 @@ module.exports = {
         format: 'object',
 
         /**
+         * if format is 'list' and readAll is true then read all contents with fetchs which divided into multiple times. (Optional)
+         *
+         * Type: boolean.
+         * Default: false.
+         **/
+        readAll: true,
+
+        /**
          * API request query options. (Optional)
          *
          * Type:

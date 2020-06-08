@@ -13,12 +13,56 @@ const sourceNodes = async (
   const { createNode } = actions;
 
   const pluginConfig = createPluginConfig(pluginOptions);
-
   const apiUrl = `https://${pluginConfig.get(
     'serviceId'
   )}.microcms.io/api/${pluginConfig.get('version')}/${pluginConfig.get(
     'endpoint'
   )}`;
+  // type option. default is endpoint value.
+  const type = pluginConfig.get('type') || pluginConfig.get('endpoint');
+
+  if (pluginConfig.get('readAll') && pluginConfig.get('format') === 'list') {
+    let offset = 0;
+    while (true) {
+      const query = { ...pluginConfig.get('query'), offset };
+      const { statusCode, body } = await fetchData(apiUrl, {
+        apiKey: pluginConfig.get('apiKey'),
+        query,
+      });
+      if (statusCode !== 200) {
+        reporter.panic(`microCMS API ERROR:
+statusCode: ${statusCode}
+message: ${body.message}`);
+        return;
+      }
+
+      if (!Array.isArray(body.contents)) {
+        reporter.panic(`format set to 'list' but got ${typeof body.contents}`);
+        return;
+      }
+      body.contents.forEach(content => {
+        createContentNode({
+          createNode,
+          createNodeId,
+          content: content,
+          type: type,
+        });
+      });
+
+      const limit = query.limit || 10;
+
+      // totalCount not found
+      if (!body.totalCount) {
+        break;
+      }
+
+      offset += limit;
+      if (offset >= body.totalCount) {
+        break;
+      }
+    }
+    return;
+  }
 
   const { statusCode, body } = await fetchData(apiUrl, {
     apiKey: pluginConfig.get('apiKey'),
@@ -30,9 +74,6 @@ const sourceNodes = async (
 statusCode: ${statusCode}
 message: ${body.message}`);
   }
-
-  // type option. default is endpoint value.
-  const type = pluginConfig.get('type') || pluginConfig.get('endpoint');
 
   // list content
   if (

@@ -253,3 +253,7 @@ and('filter1', 'filter2', ..., 'filter10')
 or('filter1', 'filter2', ..., 'filter10')
 //=> filter1[or]filter2[or]...[or]filter10
 ```
+
+## Contributing
+日本語歓迎🇯🇵
+Pull Request, Issueお気軽にどうぞ。

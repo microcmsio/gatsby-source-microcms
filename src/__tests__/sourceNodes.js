@@ -105,19 +105,19 @@ describe('sourceNodes', () => {
       readAll: true,
       version: 'v1',
       query: {
-        limit: 2,
+        limit: 3,
       },
     };
     mockResponse = {
       statusCode: 200,
       body: {
         contents: [{ id: '1' }, { id: '2' }, { id: '3' }],
-        totalCount: 2,
+        totalCount: 12,
       },
     };
     await sourceNodes({ actions, createNodeId, reporter }, options);
-    expect(actions.createNode.mock.calls.length).toBe(3);
-    expect(createNodeId.mock.calls.length).toBe(3);
+    expect(actions.createNode.mock.calls.length).toBe(12);
+    expect(createNodeId.mock.calls.length).toBe(12);
     expect(reporter.panic).not.toBeCalled();
   });
   test('sourceNodes with list, error response', async () => {

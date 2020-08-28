@@ -24,7 +24,7 @@ const optionsSchema = Joi.object().keys({
   serviceId: Joi.string()
     .required()
     .empty(),
-  endpoint: Joi.string()
+  apis: Joi.array()
     .required()
     .empty(),
   type: Joi.string(),

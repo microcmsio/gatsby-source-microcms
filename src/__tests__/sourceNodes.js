@@ -20,13 +20,23 @@ beforeEach(() => {
   reporter.panic.mockClear();
 });
 
-const pluginOptions = {
+const listPluginOptions = {
   apiKey: 'key',
   serviceId: 'id',
-  endpoint: 'point',
-  format: 'list',
-  readAll: false,
   version: 'v1',
+  apis: [{
+    endpoint: 'list',
+  }]
+};
+
+const objectPluginOptions = {
+  apiKey: 'key',
+  serviceId: 'id',
+  version: 'v1',
+  apis: [{
+    endpoint: 'object',
+    format: 'object',
+  }]
 };
 
 describe('sourceNodes', () => {
@@ -35,7 +45,7 @@ describe('sourceNodes', () => {
       statusCode: 200,
       body: { contents: [{ id: '1' }, { id: '2' }], totalCount: 2 },
     };
-    await sourceNodes({ actions, createNodeId, reporter }, pluginOptions);
+    await sourceNodes({ actions, createNodeId, reporter }, listPluginOptions);
     expect(actions.createNode.mock.calls.length).toBe(2);
     expect(createNodeId.mock.calls.length).toBe(2);
     expect(reporter.panic).not.toBeCalled();
@@ -46,7 +56,7 @@ describe('sourceNodes', () => {
       statusCode: 400,
       body: { message: 'error' },
     };
-    await sourceNodes({ actions, createNodeId, reporter }, pluginOptions);
+    await sourceNodes({ actions, createNodeId, reporter }, listPluginOptions);
     expect(actions.createNode).not.toBeCalled();
     expect(createNodeId).not.toBeCalled();
     expect(reporter.panic.mock.calls.length).toBe(1);
@@ -59,7 +69,7 @@ describe('sourceNodes', () => {
     };
     await sourceNodes(
       { actions, createNodeId, reporter },
-      { ...pluginOptions, format: 'object' }
+      objectPluginOptions
     );
     expect(actions.createNode.mock.calls.length).toBe(1);
     expect(createNodeId.mock.calls.length).toBe(1);
@@ -70,7 +80,7 @@ describe('sourceNodes', () => {
     mockResponse = { statusCode: 400, body: { message: 'error' } };
     await sourceNodes(
       { actions, createNodeId, reporter },
-      { ...pluginOptions, format: 'list' }
+      objectPluginOptions
     );
     expect(actions.createNode).not.toBeCalled();
     expect(createNodeId).not.toBeCalled();
@@ -81,10 +91,11 @@ describe('sourceNodes', () => {
     const options = {
       apiKey: 'key',
       serviceId: 'id',
-      endpoint: 'point',
-      format: 'list',
-      readAll: true,
       version: 'v1',
+      apis: [{
+        endpoint: 'point',
+        format: 'list',
+      }]
     };
     mockResponse = {
       statusCode: 200,
@@ -100,13 +111,14 @@ describe('sourceNodes', () => {
     const options = {
       apiKey: 'key',
       serviceId: 'id',
-      endpoint: 'point',
-      format: 'list',
-      readAll: true,
       version: 'v1',
-      query: {
-        limit: 3,
-      },
+      apis: [{
+        endpoint: 'point',
+        format: 'list',
+        query: {
+          limit: 3,
+        },
+      }]
     };
     mockResponse = {
       statusCode: 200,
@@ -124,10 +136,11 @@ describe('sourceNodes', () => {
     const options = {
       apiKey: 'key',
       serviceId: 'id',
-      endpoint: 'point',
-      format: 'list',
-      readAll: true,
       version: 'v1',
+      apis: [{
+        endpoint: 'point',
+        format: 'list',
+      }]
     };
     mockResponse = {
       statusCode: 400,
@@ -143,10 +156,11 @@ describe('sourceNodes', () => {
     const options = {
       apiKey: 'key',
       serviceId: 'id',
-      endpoint: 'point',
-      format: 'list',
-      readAll: true,
       version: 'v1',
+      apis: [{
+        endpoint: 'point',
+        format: 'list',
+      }]
     };
     mockResponse = {
       statusCode: 200,
@@ -161,13 +175,14 @@ describe('sourceNodes', () => {
     const options = {
       apiKey: 'key',
       serviceId: 'id',
-      endpoint: 'point',
-      format: 'list',
-      readAll: true,
       version: 'v1',
-      query: {
-        limit: 0,
-      },
+      apis: [{
+        endpoint: 'point',
+        format: 'list',
+        query: {
+          limit: 0,
+        },
+      }]
     };
     mockResponse = {
       statusCode: 200,
@@ -185,13 +200,14 @@ describe('sourceNodes', () => {
     const options = {
       apiKey: 'key',
       serviceId: 'id',
-      endpoint: 'point',
-      format: 'list',
-      readAll: true,
       version: 'v1',
-      query: {
-        limit: 20,
-      },
+      apis: [{
+        endpoint: 'point',
+        format: 'list',
+        query: {
+          limit: 20,
+        },
+      }]
     };
     mockResponse = {
       statusCode: 200,
@@ -206,13 +222,14 @@ describe('sourceNodes', () => {
     const options = {
       apiKey: 'key',
       serviceId: 'id',
-      endpoint: 'point',
-      format: 'list',
-      readAll: true,
       version: 'v1',
-      query: {
-        limit: 1,
-      },
+      apis: [{
+        endpoint: 'point',
+        format: 'list',
+        query: {
+          limit: 1,
+        },
+      }]
     };
     mockResponse = {
       statusCode: 200,

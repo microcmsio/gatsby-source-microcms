@@ -20,8 +20,10 @@ const sourceNodes = async (
     // type option. default is endpoint value.
     const type = api.type || api.endpoint;
 
+    const { format = 'list' } = api;
+
     // get all list data
-    if (api.format === 'list') {
+    if (format === 'list') {
       let offset = 0;
       while (true) {
         const query = { ...api.query, offset };
@@ -61,17 +63,18 @@ message: ${body.message}`);
           break;
         }
       }
-    } else if (api.format === 'object') {
+    } else if (format === 'object') {
       // get object data
       const { statusCode, body } = await fetchData(apiUrl, {
         apiKey: pluginConfig.get('apiKey'),
-        query: pluginConfig.get('query'),
+        query: api.query,
       });
 
       if (statusCode !== 200) {
         reporter.panic(`microCMS API ERROR:
-  statusCode: ${statusCode}
-  message: ${body.message}`);
+statusCode: ${statusCode}
+message: ${body.message}`);
+        return;
       }
 
       createContentNode({

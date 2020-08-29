@@ -1,11 +1,7 @@
 const Joi = require('@hapi/joi');
 
 const defaultOptions = {
-  format: 'list',
   version: 'v1',
-  readAll: false,
-  fields: [],
-  query: {},
 };
 
 const createPluginConfig = pluginOptions => {
@@ -24,22 +20,23 @@ const optionsSchema = Joi.object().keys({
   serviceId: Joi.string()
     .required()
     .empty(),
-  apis: Joi.array()
+  apis: Joi.array().items(Joi.object({
+    endpoint: Joi.string().required().empty(),
+    type: Joi.string(),
+    format: Joi.string().pattern(/^(list|object)$/),
+    query: Joi.object({
+      draftKey: Joi.string(),
+      fields: Joi.string(),
+      limit: Joi.number().integer(),
+      offset: Joi.number().integer(),
+      filters: Joi.string(),
+      depth: Joi.number()
+        .integer()
+        .max(3),
+    }),
+  }))
     .required()
     .empty(),
-  type: Joi.string(),
-  format: Joi.string().pattern(/^(list|object)$/),
-  readAll: Joi.boolean(),
-  query: Joi.object({
-    draftKey: Joi.string(),
-    fields: Joi.string(),
-    limit: Joi.number().integer(),
-    offset: Joi.number().integer(),
-    filters: Joi.string(),
-    depth: Joi.number()
-      .integer()
-      .max(3),
-  }),
   version: Joi.string(),
   plugins: Joi.array(),
 });

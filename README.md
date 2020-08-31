@@ -127,6 +127,7 @@ module.exports = {
 
           /**
            * microCMS's content type('list' or 'object'). (Optional)
+           * if format is 'list', read all contents by fetching multiple times.
            *
            * Type: string.
            * Default: 'list'.

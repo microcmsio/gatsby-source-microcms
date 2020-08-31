@@ -29,7 +29,9 @@ module.exports = {
       options: {
         apiKey: 'MICROCMS_API_KEY',
         serviceId: 'myblog',
-        endpoint: 'posts',
+        apis: [{
+          endpoint: 'posts',
+        }],
       },
     },
   ],
@@ -91,7 +93,7 @@ module.exports = {
         apiKey: '11111111-2222-3333-4444-555555555555',
 
         /**
-         * Subdomain information. (Required)
+         * Service information. (Required)
          * xxxx.microcms.io
          *
          * Type: string.
@@ -99,59 +101,59 @@ module.exports = {
         serviceId: 'xxxx',
 
         /**
-         * API endpoint name. (Required)
-         * https://xxxx.microcms.io/api/v1/posts
+         * API information. (Required)
+         * Multiple APIs can be specified.
          *
-         * Type: string.
+         * Type: array.
          **/
-        endpoint: 'posts',
+        apis: [{
+          /**
+           * API endpoint name. (Required)
+           * https://xxxx.microcms.io/api/v1/posts
+           *
+           * Type: string.
+           **/
+          endpoint: 'posts',
 
-        /**
-         * Graphql type. (Optional)
-         * This is used in GraphQL queries.
-         * If type = 'post', the GraphQL types are named 'microcmsPost' and 'allMicrocmsPost'.
-         *
-         * Type: string.
-         * Default: endpoint value.
-         **/
-        type: 'post',
+          /**
+           * Graphql type. (Optional)
+           * This is used in GraphQL queries.
+           * If type = 'post', the GraphQL types are named 'microcmsPost' and 'allMicrocmsPost'.
+           *
+           * Type: string.
+           * Default: endpoint value.
+           **/
+          type: 'post',
 
-        /**
-         * microCMS's content type('list' or 'object'). (Optional)
-         *
-         * Type: string.
-         * Default: 'list'.
-         **/
-        format: 'object',
+          /**
+           * microCMS's content type('list' or 'object'). (Optional)
+           *
+           * Type: string.
+           * Default: 'list'.
+           **/
+          format: 'object',
 
-        /**
-         * if format is 'list' and readAll is true then read all contents with fetchs which divided into multiple times. (Optional)
-         *
-         * Type: boolean.
-         * Default: false.
-         **/
-        readAll: true,
-
-        /**
-         * API request query options. (Optional)
-         *
-         * Type:
-         *   draftKey: string.
-         *   limit: number.
-         *   offset: number.
-         *   fields: string.
-         *   filters: string.
-         *   depth: number.
-         * Default: {}.
-         **/
-        query: {
-          draftKey: 'DRAFT_KEY',
-          limit: 100,
-          offset: 40,
-          fields: ['id', 'title', 'body'].join(','),
-          filters: 'tag[exists]',
-          depth: 2
-        }
+          /**
+           * API request query options. (Optional)
+           *
+           * Type:
+           *   draftKey: string.
+           *   limit: number.
+           *   offset: number.
+           *   fields: string.
+           *   filters: string.
+           *   depth: number.
+           * Default: {}.
+           **/
+          query: {
+            draftKey: 'DRAFT_KEY',
+            limit: 100,
+            offset: 40,
+            fields: ['id', 'title', 'body'].join(','),
+            filters: 'tag[exists]',
+            depth: 2
+          }
+        }],
       },
     },
   ],
@@ -171,10 +173,12 @@ module.exports = {
     {
       resolve: 'gatsby-source-microcms',
       options: {
-        query: {
-          filters: and(contains('title', 'sale'), exists('tag')),
-          //=> `title[contains]sale[and]tag[exists]`
-        }
+        apis: [{
+          query: {
+            filters: and(contains('title', 'sale'), exists('tag')),
+            //=> `title[contains]sale[and]tag[exists]`
+          }
+        }]
       },
     },
   ],

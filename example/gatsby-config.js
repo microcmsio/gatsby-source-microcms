@@ -18,29 +18,29 @@ module.exports = {
       options: {
         apiKey: process.env.MICROCMS_API_KEY || MICROCMS_API_KEY,
         serviceId: process.env.MICROCMS_SERVICE_ID || MICROCMS_SERVICE_ID,
-        endpoint: 'gatsbylist',
-        query: {
-          limit: 100,
-          fields: [
-            'id',
-            'postsId',
-            'title',
-            'body',
-            'createdAt',
-            'updatedAt',
-          ].join(','),
-          filters: exists('title'),
-        },
+        apis: [
+          {
+            endpoint: 'gatsbylist',
+            format: 'list',
+            query: {
+              limit: 100,
+              fields: [
+                'id',
+                'postsId',
+                'title',
+                'body',
+                'createdAt',
+                'updatedAt',
+              ].join(','),
+              filters: exists('title'),
+            }
+          },
+          {
+            endpoint: 'gatsbyobject',
+            format: 'object'
+          }
+        ]
       },
-    },
-    {
-      resolve: require.resolve('../gatsby-node'),
-      options: {
-        apiKey: process.env.MICROCMS_API_KEY || MICROCMS_API_KEY,
-        serviceId: process.env.MICROCMS_SERVICE_ID || MICROCMS_SERVICE_ID,
-        endpoint: 'gatsbyobject',
-        format: 'object',
-      },
-    },
+    }
   ],
 };

@@ -1,6 +1,6 @@
 {
   "name": "gatsby-source-microcms",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Source plugin for Gatsby from microCMS.",
   "main": "gatsby-node.js",
   "license": "MIT",

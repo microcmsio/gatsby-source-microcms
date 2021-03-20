@@ -93,6 +93,14 @@ module.exports = {
         apiKey: '11111111-2222-3333-4444-555555555555',
 
         /**
+         * Global draft key.
+         * If you set this key, you can get all draft contents.
+         *
+         * Type: string.
+         **/
+        globalDraftKey: '11111111-2222-3333-4444-555555555555',
+
+        /**
          * Service information. (Required)
          * xxxx.microcms.io
          *

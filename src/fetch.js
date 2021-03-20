@@ -7,7 +7,7 @@ const fetch = require('node-fetch');
  * @param {string} param.apiKey
  * @param {object} param.query
  */
-module.exports = function fetchData(url, { apiKey, query }) {
+module.exports = function fetchData(url, { apiKey, globalDraftKey, query }) {
   // remove empty string or undefined or null query
   for (let q in query) {
     if (!query[q]) {
@@ -21,6 +21,7 @@ module.exports = function fetchData(url, { apiKey, query }) {
   return fetch(reqUrl, {
     headers: {
       'x-api-key': apiKey,
+      'x-global-draft-key': globalDraftKey,
     },
   }).then(async res => {
     const body = await res.json();

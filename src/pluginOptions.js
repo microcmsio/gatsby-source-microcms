@@ -17,6 +17,7 @@ const optionsSchema = Joi.object().keys({
   apiKey: Joi.string()
     .required()
     .empty(),
+  globalDraftKey: Joi.string(),
   serviceId: Joi.string()
     .required()
     .empty(),

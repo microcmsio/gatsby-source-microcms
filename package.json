@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/wantainc/gatsby-source-microcms.git"
+    "url": "https://github.com/microcmsio/gatsby-source-microcms.git"
   },
   "devDependencies": {
     "eslint": "^6.5.1",

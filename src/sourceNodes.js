@@ -43,10 +43,11 @@ message: ${body.message}`);
           reporter.panic(`format set to 'list' but got ${typeof body.contents}`);
           return;
         }
-        body.contents.forEach(content => {
+        body.contents.forEach((content, index) => {
           createContentNode({
             createNode,
             createNodeId,
+            sortIndex: index,
             content: content,
             type: type,
           });

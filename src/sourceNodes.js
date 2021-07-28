@@ -47,7 +47,7 @@ message: ${body.message}`);
           createContentNode({
             createNode,
             createNodeId,
-            sortIndex: index,
+            sortIndex: offset + index,
             content: content,
             type: type,
           });

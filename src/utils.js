@@ -18,7 +18,13 @@ const isObjectContent = ({ format, content }) => {
   );
 };
 
-const createContentNode = ({ createNode, createNodeId, content, type }) => {
+const createContentNode = ({
+  createNode,
+  createNodeId,
+  sortIndex,
+  content,
+  type,
+}) => {
   const nodeContent = JSON.stringify(content);
   const nodeId = createNodeId(content.id || nodeContent);
   const nodeContentDigest = crypto
@@ -29,6 +35,7 @@ const createContentNode = ({ createNode, createNodeId, content, type }) => {
   const node = {
     ...content,
     id: nodeId,
+    sortIndex: sortIndex,
     parent: null,
     children: [],
     internal: {

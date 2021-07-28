@@ -44,10 +44,11 @@ message: ${body.message}`);
           return;
         }
         body.contents.forEach((content, index) => {
+          let sortIndex = offset + index;
           createContentNode({
             createNode,
             createNodeId,
-            sortIndex: index,
+            sortIndex: sortIndex,
             content: content,
             type: type,
           });

@@ -52,6 +52,7 @@ describe('createContentNode', () => {
     createContentNode({
       createNode,
       createNodeId,
+      sortIndex: 0,
       content: { id: 'abcde' },
       type: 'post',
     });
@@ -64,6 +65,7 @@ describe('createContentNode', () => {
     createContentNode({
       createNode,
       createNodeId,
+      sortIndex: 0,
       content: { id: 'vwxyz', body: 'content' },
       type: 'news',
     });
@@ -76,6 +78,7 @@ describe('createContentNode', () => {
     createContentNode({
       createNode,
       createNodeId,
+      sortIndex: 0,
       content: { body: 'content' },
       type: 'body',
     });

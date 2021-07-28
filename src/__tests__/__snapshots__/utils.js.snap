@@ -14,6 +14,7 @@ Array [
       },
       "newsId": "vwxyz",
       "parent": null,
+      "sortIndex": 0,
     },
   ],
 ]
@@ -32,6 +33,7 @@ Array [
         "type": "MicrocmsBody",
       },
       "parent": null,
+      "sortIndex": 0,
     },
   ],
 ]
@@ -50,6 +52,7 @@ Array [
       },
       "parent": null,
       "postId": "abcde",
+      "sortIndex": 0,
     },
   ],
 ]

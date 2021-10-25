@@ -17,25 +17,29 @@ const optionsSchema = Joi.object().keys({
   apiKey: Joi.string()
     .required()
     .empty(),
-  globalDraftKey: Joi.string(),
   serviceId: Joi.string()
     .required()
     .empty(),
-  apis: Joi.array().items(Joi.object({
-    endpoint: Joi.string().required().empty(),
-    type: Joi.string(),
-    format: Joi.string().pattern(/^(list|object)$/),
-    query: Joi.object({
-      draftKey: Joi.string(),
-      fields: Joi.string(),
-      limit: Joi.number().integer(),
-      offset: Joi.number().integer(),
-      filters: Joi.string(),
-      depth: Joi.number()
-        .integer()
-        .max(3),
-    }),
-  }))
+  apis: Joi.array()
+    .items(
+      Joi.object({
+        endpoint: Joi.string()
+          .required()
+          .empty(),
+        type: Joi.string(),
+        format: Joi.string().pattern(/^(list|object)$/),
+        query: Joi.object({
+          draftKey: Joi.string(),
+          fields: Joi.string(),
+          limit: Joi.number().integer(),
+          offset: Joi.number().integer(),
+          filters: Joi.string(),
+          depth: Joi.number()
+            .integer()
+            .max(3),
+        }),
+      })
+    )
     .required()
     .empty(),
   version: Joi.string(),

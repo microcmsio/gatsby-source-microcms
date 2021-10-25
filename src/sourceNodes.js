@@ -68,7 +68,6 @@ message: ${body.message}`);
       // get object data
       const { statusCode, body } = await fetchData(apiUrl, {
         apiKey: pluginConfig.get('apiKey'),
-        globalDraftKey: pluginConfig.get('globalDraftKey'),
         query: api.query,
       });
 

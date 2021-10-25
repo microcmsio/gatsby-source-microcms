@@ -5,9 +5,9 @@ const apiKey = 'key';
 const baseUrl = 'https://example.com';
 const nockBase = nock(baseUrl, {
   reqheaders: {
-    'x-api-key': apiKey,
+    'x-microcms-api-key': apiKey,
   },
-}).matchHeader('x-api-key', apiKey);
+}).matchHeader('x-microcms-api-key', apiKey);
 
 describe('fetch', () => {
   test('default', async () => {

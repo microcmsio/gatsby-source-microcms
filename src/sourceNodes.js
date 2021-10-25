@@ -1,8 +1,6 @@
 const { createPluginConfig } = require('./pluginOptions');
 const fetchData = require('./fetch');
-const {
-  createContentNode,
-} = require('./utils');
+const { createContentNode } = require('./utils');
 
 const sourceNodes = async (
   { actions, createNodeId, reporter },
@@ -29,7 +27,6 @@ const sourceNodes = async (
         const query = { ...api.query, offset };
         const { statusCode, body } = await fetchData(apiUrl, {
           apiKey: pluginConfig.get('apiKey'),
-          globalDraftKey: pluginConfig.get('globalDraftKey'),
           query,
         });
         if (statusCode !== 200) {
@@ -40,7 +37,9 @@ message: ${body.message}`);
         }
 
         if (!Array.isArray(body.contents)) {
-          reporter.panic(`format set to 'list' but got ${typeof body.contents}`);
+          reporter.panic(
+            `format set to 'list' but got ${typeof body.contents}`
+          );
           return;
         }
         body.contents.forEach((content, index) => {
@@ -69,7 +68,6 @@ message: ${body.message}`);
       // get object data
       const { statusCode, body } = await fetchData(apiUrl, {
         apiKey: pluginConfig.get('apiKey'),
-        globalDraftKey: pluginConfig.get('globalDraftKey'),
         query: api.query,
       });
 

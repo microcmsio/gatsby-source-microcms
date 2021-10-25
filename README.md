@@ -29,9 +29,11 @@ module.exports = {
       options: {
         apiKey: 'MICROCMS_API_KEY',
         serviceId: 'myblog',
-        apis: [{
-          endpoint: 'posts',
-        }],
+        apis: [
+          {
+            endpoint: 'posts',
+          },
+        ],
       },
     },
   ],
@@ -93,14 +95,6 @@ module.exports = {
         apiKey: '11111111-2222-3333-4444-555555555555',
 
         /**
-         * Global draft key.
-         * If you set this key, you can get all draft contents.
-         *
-         * Type: string.
-         **/
-        globalDraftKey: '11111111-2222-3333-4444-555555555555',
-
-        /**
          * Service information. (Required)
          * xxxx.microcms.io
          *
@@ -114,55 +108,57 @@ module.exports = {
          *
          * Type: array.
          **/
-        apis: [{
-          /**
-           * API endpoint name. (Required)
-           * https://xxxx.microcms.io/api/v1/posts
-           *
-           * Type: string.
-           **/
-          endpoint: 'posts',
+        apis: [
+          {
+            /**
+             * API endpoint name. (Required)
+             * https://xxxx.microcms.io/api/v1/posts
+             *
+             * Type: string.
+             **/
+            endpoint: 'posts',
 
-          /**
-           * Graphql type. (Optional)
-           * This is used in GraphQL queries.
-           * If type = 'post', the GraphQL types are named 'microcmsPost' and 'allMicrocmsPost'.
-           *
-           * Type: string.
-           * Default: endpoint value.
-           **/
-          type: 'post',
+            /**
+             * Graphql type. (Optional)
+             * This is used in GraphQL queries.
+             * If type = 'post', the GraphQL types are named 'microcmsPost' and 'allMicrocmsPost'.
+             *
+             * Type: string.
+             * Default: endpoint value.
+             **/
+            type: 'post',
 
-          /**
-           * microCMS's content type('list' or 'object'). (Optional)
-           * if format is 'list', read all contents by fetching multiple times.
-           *
-           * Type: string.
-           * Default: 'list'.
-           **/
-          format: 'object',
+            /**
+             * microCMS's content type('list' or 'object'). (Optional)
+             * if format is 'list', read all contents by fetching multiple times.
+             *
+             * Type: string.
+             * Default: 'list'.
+             **/
+            format: 'object',
 
-          /**
-           * API request query options. (Optional)
-           *
-           * Type:
-           *   draftKey: string.
-           *   limit: number.
-           *   offset: number.
-           *   fields: string.
-           *   filters: string.
-           *   depth: number.
-           * Default: {}.
-           **/
-          query: {
-            draftKey: 'DRAFT_KEY',
-            limit: 100,
-            offset: 40,
-            fields: ['id', 'title', 'body'].join(','),
-            filters: 'tag[exists]',
-            depth: 2
-          }
-        }],
+            /**
+             * API request query options. (Optional)
+             *
+             * Type:
+             *   draftKey: string.
+             *   limit: number.
+             *   offset: number.
+             *   fields: string.
+             *   filters: string.
+             *   depth: number.
+             * Default: {}.
+             **/
+            query: {
+              draftKey: 'DRAFT_KEY',
+              limit: 100,
+              offset: 40,
+              fields: ['id', 'title', 'body'].join(','),
+              filters: 'tag[exists]',
+              depth: 2,
+            },
+          },
+        ],
       },
     },
   ],
@@ -175,24 +171,29 @@ This plugin provides [filters query](https://microcms.io/blog/filters-parameter/
 
 ```js
 // gatsby-config.js
-const { and, contains, exists } = require('gatsby-source-microcms/src/query-builder');
+const {
+  and,
+  contains,
+  exists,
+} = require('gatsby-source-microcms/src/query-builder');
 
 module.exports = {
   plugins: [
     {
       resolve: 'gatsby-source-microcms',
       options: {
-        apis: [{
-          query: {
-            filters: and(contains('title', 'sale'), exists('tag')),
-            //=> `title[contains]sale[and]tag[exists]`
-          }
-        }]
+        apis: [
+          {
+            query: {
+              filters: and(contains('title', 'sale'), exists('tag')),
+              //=> `title[contains]sale[and]tag[exists]`
+            },
+          },
+        ],
       },
     },
   ],
 };
-
 ```
 
 Helper list:
@@ -200,56 +201,56 @@ Helper list:
 - `equals` (alias: `eq`)
 
 ```js
-equals('gender', 'women')
+equals('gender', 'women');
 //=> gender[equals]women
 ```
 
 - `notEquals` (alias: `neq`)
 
 ```js
-notEquals('gender', 'women')
+notEquals('gender', 'women');
 //=> gender[not_equals]women
 ```
 
 - `lessThan` (alias: `lg`)
 
 ```js
-lessThan('createdAt', '2019-11')
+lessThan('createdAt', '2019-11');
 //=> createdAt[less_than]2019-11
 ```
 
 - `greaterThan` (alias: `gt`)
 
 ```js
-greaterThan('createdAt', '2019-11')
+greaterThan('createdAt', '2019-11');
 //=> createdAt[greater_than]2019-11
 ```
 
 - `contains`
 
 ```js
-contains('title', 'sale')
+contains('title', 'sale');
 //=> title[contains]sale
 ```
 
 - `exists`
 
 ```js
-exists('nextLink')
+exists('nextLink');
 //=> nextLink[exists]
 ```
 
 - `notExists`
 
 ```js
-notExists('nextLink')
+notExists('nextLink');
 //=> nextLink[not_exists]
 ```
 
 - `beginsWith`
 
 ```js
-beginsWith('publishedAt', '2019-11')
+beginsWith('publishedAt', '2019-11');
 //=> publishedAt[begins_with]2019-11
 ```
 
@@ -268,5 +269,6 @@ or('filter1', 'filter2', ..., 'filter10')
 ```
 
 ## Contributing
-日本語歓迎🇯🇵
-Pull Request, Issueお気軽にどうぞ。
+
+日本語歓迎 🇯🇵
+Pull Request, Issue お気軽にどうぞ。

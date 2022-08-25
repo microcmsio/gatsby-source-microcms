@@ -18,8 +18,8 @@ const isObjectContent = ({ format, content }) => {
   );
 };
 
-const makeId = ({ serviceId, id, endpoint, type }) => {
-  return `${serviceId}___${id}___${endpoint}${type ? `___${type}` : ''}`;
+const makeId = ({ serviceId, id, endpoint }) => {
+  return `${serviceId}___${id}___${endpoint}`;
 };
 
 const createContentNode = ({
@@ -37,7 +37,6 @@ const createContentNode = ({
       serviceId,
       id: content.id || nodeContent,
       endpoint,
-      type,
     })
   );
   const nodeContentDigest = crypto

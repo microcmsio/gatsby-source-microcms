@@ -15,9 +15,6 @@ const sourceNodes = async (
       'serviceId'
     )}.microcms.io/api/${pluginConfig.get('version')}/${api.endpoint}`;
 
-    // type option. default is endpoint value.
-    const type = api.type || api.endpoint;
-
     const { format = 'list' } = api;
 
     // get all list data
@@ -47,8 +44,10 @@ message: ${body.message}`);
             createNode,
             createNodeId,
             sortIndex: offset + index,
-            content: content,
-            type: type,
+            content,
+            serviceId: pluginConfig.get('serviceId'),
+            endpoint: api.endpoint,
+            type: api.type,
           });
         });
 
@@ -82,7 +81,9 @@ message: ${body.message}`);
         createNode,
         createNodeId,
         content: body,
-        type: type,
+        serviceId: pluginConfig.get('serviceId'),
+        endpoint: api.endpoint,
+        type: api.type,
       });
     }
   }

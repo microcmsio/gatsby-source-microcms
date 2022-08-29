@@ -18,19 +18,34 @@ const isObjectContent = ({ format, content }) => {
   );
 };
 
+const makeId = ({ serviceId, id, endpoint }) => {
+  return `${serviceId}___${id}___${endpoint}`;
+};
+
 const createContentNode = ({
   createNode,
   createNodeId,
   sortIndex,
   content,
+  serviceId,
+  endpoint,
   type,
 }) => {
   const nodeContent = JSON.stringify(content);
-  const nodeId = createNodeId(content.id || nodeContent);
+  const nodeId = createNodeId(
+    makeId({
+      serviceId,
+      id: content.id || nodeContent,
+      endpoint,
+    })
+  );
   const nodeContentDigest = crypto
     .createHash('md5')
     .update(nodeContent)
     .digest('hex');
+
+  // type option. default is endpoint value.
+  const _type = type || endpoint;
 
   const node = {
     ...content,
@@ -39,7 +54,7 @@ const createContentNode = ({
     parent: null,
     children: [],
     internal: {
-      type: makeTypeName(type),
+      type: makeTypeName(_type),
       content: nodeContent,
       contentDigest: nodeContentDigest,
     },
@@ -50,7 +65,7 @@ const createContentNode = ({
    * rename to ${type}Id if content has id property.
    */
   if (content.id) {
-    const contentIdName = camelCase([type, 'id']);
+    const contentIdName = camelCase([_type, 'id']);
     node[contentIdName] = content.id;
   }
 

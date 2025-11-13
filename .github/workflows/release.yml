@@ -17,12 +17,12 @@ jobs:
 
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
         with:
-          node-version: "12"
+          node-version: "24"
           registry-url: "https://registry.npmjs.org"
 
-      - run: npm ci
-      - run: npm test
       # Ensure npm 11.5.1 or later is installed
       - name: Update npm
         run: npm install -g npm@latest
+      - run: npm ci
+      - run: npm test
       - run: npm publish

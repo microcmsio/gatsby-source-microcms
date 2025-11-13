@@ -20,9 +20,9 @@ jobs:
           node-version: "12"
           registry-url: "https://registry.npmjs.org"
 
+      - run: npm ci
+      - run: npm test
       # Ensure npm 11.5.1 or later is installed
       - name: Update npm
         run: npm install -g npm@latest
-      - run: npm ci
-      - run: npm test
       - run: npm publish

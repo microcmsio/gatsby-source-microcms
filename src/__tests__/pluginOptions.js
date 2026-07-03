@@ -43,7 +43,7 @@ describe('validateOptions', () => {
       ],
     };
     validateOptions({ reporter }, options);
-    expect(reporter.panic).not.toBeCalled();
+    expect(reporter.panic).not.toHaveBeenCalled();
   });
 
   test('empty string options should be error.', () => {
@@ -76,7 +76,7 @@ describe('validateOptions', () => {
       ],
     };
     validateOptions({ reporter }, options);
-    expect(reporter.panic).not.toBeCalled();
+    expect(reporter.panic).not.toHaveBeenCalled();
   });
 
   test('empty type option should be error.', () => {
@@ -120,7 +120,7 @@ describe('validateOptions', () => {
 
     for (let option of options) {
       validateOptions({ reporter }, option);
-      expect(reporter.panic).not.toBeCalled();
+      expect(reporter.panic).not.toHaveBeenCalled();
     }
   });
 
@@ -154,7 +154,7 @@ describe('validateOptions', () => {
       ],
     };
     validateOptions({ reporter }, options);
-    expect(reporter.panic).not.toBeCalled();
+    expect(reporter.panic).not.toHaveBeenCalled();
   });
 
   test('invalid draftKey option should be error.', () => {
@@ -199,7 +199,7 @@ describe('validateOptions', () => {
       ],
     };
     validateOptions({ reporter }, options);
-    expect(reporter.panic).not.toBeCalled();
+    expect(reporter.panic).not.toHaveBeenCalled();
   });
 
   test('invalide fields option should be error.', () => {
@@ -236,7 +236,7 @@ describe('validateOptions', () => {
       ],
     };
     validateOptions({ reporter }, options);
-    expect(reporter.panic).not.toBeCalled();
+    expect(reporter.panic).not.toHaveBeenCalled();
   });
 
   test('invalide limit option should be error.', () => {
@@ -281,7 +281,7 @@ describe('validateOptions', () => {
       ],
     };
     validateOptions({ reporter }, options);
-    expect(reporter.panic).not.toBeCalled();
+    expect(reporter.panic).not.toHaveBeenCalled();
   });
 
   test('invalide offset option should be error.', () => {
@@ -326,7 +326,7 @@ describe('validateOptions', () => {
       ],
     };
     validateOptions({ reporter }, options);
-    expect(reporter.panic).not.toBeCalled();
+    expect(reporter.panic).not.toHaveBeenCalled();
   });
 
   test('invalid filters option should be success.', () => {
@@ -371,7 +371,7 @@ describe('validateOptions', () => {
       ],
     };
     validateOptions({ reporter }, options);
-    expect(reporter.panic).not.toBeCalled();
+    expect(reporter.panic).not.toHaveBeenCalled();
   });
 
   test('invalid depth option should be error.', () => {

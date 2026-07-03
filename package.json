@@ -9,21 +9,20 @@
     "shooontan"
   ],
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "lint": "biome lint .",
+    "lint:fix": "biome lint --write .",
+    "format": "biome format .",
+    "format:fix": "biome format --write ."
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/microcmsio/gatsby-source-microcms.git"
   },
   "devDependencies": {
-    "eslint": "^6.5.1",
-    "eslint-config-prettier": "^6.4.0",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-prettier": "^3.1.1",
-    "eslint-plugin-react": "^7.16.0",
+    "@biomejs/biome": "2.5.0",
     "jest": "^26.0.1",
-    "nock": "^11.5.0",
-    "prettier": "^1.18.2"
+    "nock": "^11.5.0"
   },
   "dependencies": {
     "@hapi/joi": "^16.1.7",

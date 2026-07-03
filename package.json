@@ -16,7 +16,7 @@
     "url": "https://github.com/microcmsio/gatsby-source-microcms.git"
   },
   "devDependencies": {
-    "eslint": "^6.5.1",
+    "eslint": "^10.6.0",
     "eslint-config-prettier": "^6.4.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-prettier": "^3.1.1",

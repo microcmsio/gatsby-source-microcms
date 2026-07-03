@@ -52,7 +52,7 @@ describe('sourceNodes', () => {
     await sourceNodes({ actions, createNodeId, reporter }, listPluginOptions);
     expect(actions.createNode.mock.calls.length).toBe(2);
     expect(createNodeId.mock.calls.length).toBe(2);
-    expect(reporter.panic).not.toBeCalled();
+    expect(reporter.panic).not.toHaveBeenCalled();
   });
 
   test('sourceNodes with list, error response', async () => {
@@ -61,8 +61,8 @@ describe('sourceNodes', () => {
       body: { message: 'error' },
     };
     await sourceNodes({ actions, createNodeId, reporter }, listPluginOptions);
-    expect(actions.createNode).not.toBeCalled();
-    expect(createNodeId).not.toBeCalled();
+    expect(actions.createNode).not.toHaveBeenCalled();
+    expect(createNodeId).not.toHaveBeenCalled();
     expect(reporter.panic.mock.calls.length).toBe(1);
   });
 
@@ -74,14 +74,14 @@ describe('sourceNodes', () => {
     await sourceNodes({ actions, createNodeId, reporter }, objectPluginOptions);
     expect(actions.createNode.mock.calls.length).toBe(1);
     expect(createNodeId.mock.calls.length).toBe(1);
-    expect(reporter.panic).not.toBeCalled();
+    expect(reporter.panic).not.toHaveBeenCalled();
   });
 
   test('sourceNodes with object, error response', async () => {
     mockResponse = { statusCode: 400, body: { message: 'error' } };
     await sourceNodes({ actions, createNodeId, reporter }, objectPluginOptions);
-    expect(actions.createNode).not.toBeCalled();
-    expect(createNodeId).not.toBeCalled();
+    expect(actions.createNode).not.toHaveBeenCalled();
+    expect(createNodeId).not.toHaveBeenCalled();
     expect(reporter.panic.mock.calls.length).toBe(1);
   });
 
@@ -104,7 +104,7 @@ describe('sourceNodes', () => {
     await sourceNodes({ actions, createNodeId, reporter }, options);
     expect(actions.createNode.mock.calls.length).toBe(2);
     expect(createNodeId.mock.calls.length).toBe(2);
-    expect(reporter.panic).not.toBeCalled();
+    expect(reporter.panic).not.toHaveBeenCalled();
   });
 
   test('sourceNodes with list and readAll, success response', async () => {
@@ -132,7 +132,7 @@ describe('sourceNodes', () => {
     await sourceNodes({ actions, createNodeId, reporter }, options);
     expect(actions.createNode.mock.calls.length).toBe(12);
     expect(createNodeId.mock.calls.length).toBe(12);
-    expect(reporter.panic).not.toBeCalled();
+    expect(reporter.panic).not.toHaveBeenCalled();
   });
   test('sourceNodes with list, error response', async () => {
     const options = {
@@ -151,8 +151,8 @@ describe('sourceNodes', () => {
       body: { message: 'error' },
     };
     await sourceNodes({ actions, createNodeId, reporter }, options);
-    expect(actions.createNode).not.toBeCalled();
-    expect(createNodeId).not.toBeCalled();
+    expect(actions.createNode).not.toHaveBeenCalled();
+    expect(createNodeId).not.toHaveBeenCalled();
     expect(reporter.panic.mock.calls.length).toBe(1);
   });
 
@@ -173,8 +173,8 @@ describe('sourceNodes', () => {
       body: { content: { id: '1' }, totalCount: 1 },
     };
     await sourceNodes({ actions, createNodeId, reporter }, options);
-    expect(actions.createNode).not.toBeCalled();
-    expect(createNodeId).not.toBeCalled();
+    expect(actions.createNode).not.toHaveBeenCalled();
+    expect(createNodeId).not.toHaveBeenCalled();
     expect(reporter.panic.mock.calls.length).toBe(1);
   });
   test('sourceNodes with list and readAll, success response', async () => {
@@ -202,7 +202,7 @@ describe('sourceNodes', () => {
     await sourceNodes({ actions, createNodeId, reporter }, options);
     expect(actions.createNode.mock.calls.length).toBe(3);
     expect(createNodeId.mock.calls.length).toBe(3);
-    expect(reporter.panic).not.toBeCalled();
+    expect(reporter.panic).not.toHaveBeenCalled();
   });
   test('sourceNodes with list and readAll, success response', async () => {
     const options = {
@@ -226,7 +226,7 @@ describe('sourceNodes', () => {
     await sourceNodes({ actions, createNodeId, reporter }, options);
     expect(actions.createNode.mock.calls.length).toBe(3);
     expect(createNodeId.mock.calls.length).toBe(3);
-    expect(reporter.panic).not.toBeCalled();
+    expect(reporter.panic).not.toHaveBeenCalled();
   });
   test('sourceNodes with list and readAll, success response', async () => {
     const options = {
@@ -250,6 +250,6 @@ describe('sourceNodes', () => {
     await sourceNodes({ actions, createNodeId, reporter }, options);
     expect(actions.createNode.mock.calls.length).toBe(3);
     expect(createNodeId.mock.calls.length).toBe(3);
-    expect(reporter.panic).not.toBeCalled();
+    expect(reporter.panic).not.toHaveBeenCalled();
   });
 });

@@ -14,18 +14,12 @@ const createPluginConfig = pluginOptions => {
 };
 
 const optionsSchema = Joi.object().keys({
-  apiKey: Joi.string()
-    .required()
-    .empty(),
-  serviceId: Joi.string()
-    .required()
-    .empty(),
+  apiKey: Joi.string().required().empty(),
+  serviceId: Joi.string().required().empty(),
   apis: Joi.array()
     .items(
       Joi.object({
-        endpoint: Joi.string()
-          .required()
-          .empty(),
+        endpoint: Joi.string().required().empty(),
         type: Joi.string(),
         format: Joi.string().pattern(/^(list|object)$/),
         query: Joi.object({
@@ -34,9 +28,7 @@ const optionsSchema = Joi.object().keys({
           limit: Joi.number().integer(),
           offset: Joi.number().integer(),
           filters: Joi.string(),
-          depth: Joi.number()
-            .integer()
-            .max(3),
+          depth: Joi.number().integer().max(3),
         }),
       })
     )

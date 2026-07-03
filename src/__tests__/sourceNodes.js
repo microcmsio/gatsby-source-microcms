@@ -24,19 +24,23 @@ const listPluginOptions = {
   apiKey: 'key',
   serviceId: 'id',
   version: 'v1',
-  apis: [{
-    endpoint: 'list',
-  }]
+  apis: [
+    {
+      endpoint: 'list',
+    },
+  ],
 };
 
 const objectPluginOptions = {
   apiKey: 'key',
   serviceId: 'id',
   version: 'v1',
-  apis: [{
-    endpoint: 'object',
-    format: 'object',
-  }]
+  apis: [
+    {
+      endpoint: 'object',
+      format: 'object',
+    },
+  ],
 };
 
 describe('sourceNodes', () => {
@@ -67,10 +71,7 @@ describe('sourceNodes', () => {
       statusCode: 200,
       body: { id: 'id' },
     };
-    await sourceNodes(
-      { actions, createNodeId, reporter },
-      objectPluginOptions
-    );
+    await sourceNodes({ actions, createNodeId, reporter }, objectPluginOptions);
     expect(actions.createNode.mock.calls.length).toBe(1);
     expect(createNodeId.mock.calls.length).toBe(1);
     expect(reporter.panic).not.toBeCalled();
@@ -78,10 +79,7 @@ describe('sourceNodes', () => {
 
   test('sourceNodes with object, error response', async () => {
     mockResponse = { statusCode: 400, body: { message: 'error' } };
-    await sourceNodes(
-      { actions, createNodeId, reporter },
-      objectPluginOptions
-    );
+    await sourceNodes({ actions, createNodeId, reporter }, objectPluginOptions);
     expect(actions.createNode).not.toBeCalled();
     expect(createNodeId).not.toBeCalled();
     expect(reporter.panic.mock.calls.length).toBe(1);
@@ -92,10 +90,12 @@ describe('sourceNodes', () => {
       apiKey: 'key',
       serviceId: 'id',
       version: 'v1',
-      apis: [{
-        endpoint: 'point',
-        format: 'list',
-      }]
+      apis: [
+        {
+          endpoint: 'point',
+          format: 'list',
+        },
+      ],
     };
     mockResponse = {
       statusCode: 200,
@@ -112,13 +112,15 @@ describe('sourceNodes', () => {
       apiKey: 'key',
       serviceId: 'id',
       version: 'v1',
-      apis: [{
-        endpoint: 'point',
-        format: 'list',
-        query: {
-          limit: 3,
+      apis: [
+        {
+          endpoint: 'point',
+          format: 'list',
+          query: {
+            limit: 3,
+          },
         },
-      }]
+      ],
     };
     mockResponse = {
       statusCode: 200,
@@ -137,10 +139,12 @@ describe('sourceNodes', () => {
       apiKey: 'key',
       serviceId: 'id',
       version: 'v1',
-      apis: [{
-        endpoint: 'point',
-        format: 'list',
-      }]
+      apis: [
+        {
+          endpoint: 'point',
+          format: 'list',
+        },
+      ],
     };
     mockResponse = {
       statusCode: 400,
@@ -157,10 +161,12 @@ describe('sourceNodes', () => {
       apiKey: 'key',
       serviceId: 'id',
       version: 'v1',
-      apis: [{
-        endpoint: 'point',
-        format: 'list',
-      }]
+      apis: [
+        {
+          endpoint: 'point',
+          format: 'list',
+        },
+      ],
     };
     mockResponse = {
       statusCode: 200,
@@ -176,13 +182,15 @@ describe('sourceNodes', () => {
       apiKey: 'key',
       serviceId: 'id',
       version: 'v1',
-      apis: [{
-        endpoint: 'point',
-        format: 'list',
-        query: {
-          limit: 0,
+      apis: [
+        {
+          endpoint: 'point',
+          format: 'list',
+          query: {
+            limit: 0,
+          },
         },
-      }]
+      ],
     };
     mockResponse = {
       statusCode: 200,
@@ -201,13 +209,15 @@ describe('sourceNodes', () => {
       apiKey: 'key',
       serviceId: 'id',
       version: 'v1',
-      apis: [{
-        endpoint: 'point',
-        format: 'list',
-        query: {
-          limit: 20,
+      apis: [
+        {
+          endpoint: 'point',
+          format: 'list',
+          query: {
+            limit: 20,
+          },
         },
-      }]
+      ],
     };
     mockResponse = {
       statusCode: 200,
@@ -223,13 +233,15 @@ describe('sourceNodes', () => {
       apiKey: 'key',
       serviceId: 'id',
       version: 'v1',
-      apis: [{
-        endpoint: 'point',
-        format: 'list',
-        query: {
-          limit: 1,
+      apis: [
+        {
+          endpoint: 'point',
+          format: 'list',
+          query: {
+            limit: 1,
+          },
         },
-      }]
+      ],
     };
     mockResponse = {
       statusCode: 200,

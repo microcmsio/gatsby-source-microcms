@@ -2,7 +2,7 @@ import * as React from 'react';
 import { graphql } from 'gatsby';
 
 export default props => {
-  const single = props.data.allMicrocmsGatsbyobject.nodes[0];
+  const single = props.data.allMicrocmsPage.nodes[0];
 
   return (
     <div>
@@ -16,7 +16,7 @@ export default props => {
 
 export const query = graphql`
   {
-    allMicrocmsGatsbyobject {
+    allMicrocmsPage {
       nodes {
         id
         title

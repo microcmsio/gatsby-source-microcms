@@ -1,4 +1,4 @@
-const path = require(`path`);
+const path = require(`node:path`);
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
@@ -7,10 +7,10 @@ exports.createPages = async ({ graphql, actions }) => {
   const result = await graphql(
     `
       {
-        allMicrocmsGatsbylist(sort: { fields: [createdAt], order: DESC }) {
+        allMicrocmsBlog(sort: { fields: [createdAt], order: DESC }) {
           edges {
             node {
-              gatsbylistId
+              blogId
               createdAt
             }
           }
@@ -23,12 +23,12 @@ exports.createPages = async ({ graphql, actions }) => {
     throw result.errors;
   }
 
-  result.data.allMicrocmsGatsbylist.edges.forEach((post, index) => {
+  result.data.allMicrocmsBlog.edges.forEach((post, index) => {
     createPage({
-      path: post.node.gatsbylistId,
+      path: post.node.blogId,
       component: blogPost,
       context: {
-        slug: post.node.gatsbylistId,
+        slug: post.node.blogId,
       },
     });
   });

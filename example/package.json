@@ -4,13 +4,14 @@
   "description": "",
   "main": "gatsby-config.js",
   "scripts": {
+    "clean": "gatsby clean",
     "dev": "gatsby develop",
-    "build": "gatsby build"
+    "build": "gatsby build",
+    "serve": "gatsby serve"
   },
   "dependencies": {
-    "dotenv": "^8.2.0",
-    "gatsby": "^2.22.10",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "gatsby": "^5.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   }
 }

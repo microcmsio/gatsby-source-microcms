@@ -2,10 +2,10 @@ import * as React from 'react';
 import { graphql, Link } from 'gatsby';
 
 export default props => {
-  const posts = props.data.allMicrocmsGatsbylist.nodes.map(node => {
+  const posts = props.data.allMicrocmsBlog.nodes.map(node => {
     return (
       <div key={node.id}>
-        <Link to={node.gatsbylistId}>{node.title}</Link>
+        <Link to={node.blogId}>{node.title}</Link>
         <span>
           {node.createdAt} - {node.updatedAt}
         </span>
@@ -30,12 +30,12 @@ export const pageQuery = graphql`
         siteUrl
       }
     }
-    allMicrocmsGatsbylist {
+    allMicrocmsBlog {
       nodes {
         id
-        gatsbylistId
+        blogId
         title
-        body
+        contents
         createdAt(formatString: "YYYY.MM.DD")
         updatedAt(formatString: "YYYY.MM.DD")
       }

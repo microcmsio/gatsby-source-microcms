@@ -1,8 +1,11 @@
-require('dotenv').config();
+const { loadEnvFile } = require('node:process');
+const path = require('node:path');
 
-// We prepared one service to make it easy for anyone to develop.
-const MICROCMS_API_KEY = 'dc59f358-4622-471f-8d1e-6c7a6f969558';
-const MICROCMS_SERVICE_ID = 'example';
+loadEnvFile(path.resolve(__dirname, '.env'));
+
+if (!process.env.MICROCMS_API_KEY || !process.env.MICROCMS_SERVICE_ID) {
+  throw new Error('MICROCMS_API_KEY and MICROCMS_SERVICE_ID must be set');
+}
 
 const { and, equals, exists, notExists } = require('../src/query-builder');
 
@@ -16,19 +19,19 @@ module.exports = {
     {
       resolve: require.resolve('../gatsby-node'),
       options: {
-        apiKey: process.env.MICROCMS_API_KEY || MICROCMS_API_KEY,
-        serviceId: process.env.MICROCMS_SERVICE_ID || MICROCMS_SERVICE_ID,
+        apiKey: process.env.MICROCMS_API_KEY,
+        serviceId: process.env.MICROCMS_SERVICE_ID,
         apis: [
           {
-            endpoint: 'gatsbylist',
+            endpoint: 'blog',
             format: 'list',
             query: {
               limit: 100,
               fields: [
                 'id',
-                'postsId',
+                'blogId',
                 'title',
-                'body',
+                'contents',
                 'createdAt',
                 'updatedAt',
               ].join(','),
@@ -36,7 +39,7 @@ module.exports = {
             },
           },
           {
-            endpoint: 'gatsbyobject',
+            endpoint: 'page',
             format: 'object',
           },
         ],

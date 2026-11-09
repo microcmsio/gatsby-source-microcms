@@ -20,7 +20,7 @@
     "url": "https://github.com/microcmsio/gatsby-source-microcms.git"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.5.15",
+    "@biomejs/biome": "2.6.6",
     "jest": "^30.5.2",
     "nock": "^14.0.17"
   },

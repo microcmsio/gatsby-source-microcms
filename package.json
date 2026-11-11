@@ -38,5 +38,13 @@
     "gatsby-plugin",
     "gatsby-source-plugin",
     "microCMS"
-  ]
+  ],
+  "packageManager": "npm@12.2.1",
+  "allowScripts": {
+    "@parcel/watcher@2.6.0": false,
+    "unrs-resolver@1.12.2": true
+  },
+  "engines": {
+    "node": "26.x"
+  }
 }

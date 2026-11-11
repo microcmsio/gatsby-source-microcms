@@ -11,7 +11,7 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          node-version: "24"
+          node-version-file: ".node-version"
           cache: "npm"
       - run: npm ci
       - name: Format
@@ -23,13 +23,20 @@ jobs:
     strategy:
       matrix:
         os: [ ubuntu-slim ]
-        node-version: [ "22.x", "24.x", "26.x" ]
+        node-version: [ "18.x", "20.x", "22.x", "24.x", "26.x" ]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - name: Run with Node v${{ matrix.node-version }}
+      # Install on the toolchain Node; run tests on each supported runtime.
+      - name: Use development Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: ".node-version"
+          cache: "npm"
+      - run: npm ci
+      - name: Use runtime Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: ${{ matrix.node-version }}
@@ -37,5 +44,4 @@ jobs:
         run: |
           echo "node: $(node -v)"
           echo "npm: $(npm -v)"
-      - run: npm ci
       - run: npm test

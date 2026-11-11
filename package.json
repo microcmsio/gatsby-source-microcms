@@ -38,5 +38,9 @@
     "gatsby-plugin",
     "gatsby-source-plugin",
     "microCMS"
-  ]
+  ],
+  "allowScripts": {
+    "@parcel/watcher@2.6.0": false,
+    "unrs-resolver@1.12.2": true
+  }
 }

@@ -42,8 +42,5 @@
   "allowScripts": {
     "@parcel/watcher@2.6.0": false,
     "unrs-resolver@1.12.2": true
-  },
-  "engines": {
-    "node": ">=18.0.0"
   }
 }
